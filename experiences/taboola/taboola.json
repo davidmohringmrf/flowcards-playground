@@ -8,7 +8,6 @@
 			"snapPoints": {
 				"initial": 0.7,
 				"minimised": 0.85,
-				"promoted": 176,
 				"active": 80
 			},
 			"features": {
@@ -17,7 +16,10 @@
 				"button": {
 					"action": "setSnapPoint:initial"
 				},
-				"useNaturalScroll": true
+				"useNaturalScroll": true,
+				"header": {
+					"dragHandlerBg": "#FFFFFF"
+				}
 			},
 			"triggers": {
 				"myScrollTrigger": {
