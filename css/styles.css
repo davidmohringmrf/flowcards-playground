@@ -361,6 +361,11 @@ form {
     margin: 0 auto;
   }
 
+  .card:hover .card__btn-placeholder {
+    display: none;
+    pointer-events: none;
+  }
+
   .card__image {
     display: inherit;
   }
