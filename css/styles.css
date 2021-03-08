@@ -77,7 +77,6 @@ form {
   display: grid;
   gap: 10px;
   grid-template-columns: 6fr 2fr;
-  /* grid-template-columns: 6fr 2fr 3fr;*/
   padding: 20px;
   width: 100%;
   box-sizing: border-box;
@@ -99,7 +98,6 @@ form {
 
 .card-type {
   display: none;
-  /* display: flex;*/
   margin: auto;
   align-items: center;
   justify-content: space-around;
