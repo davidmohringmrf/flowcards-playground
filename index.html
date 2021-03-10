@@ -31,7 +31,6 @@
           <input
             id="siteUrl"
             name="siteUrl"
-            type="url"
             value=""
             class="form__input"
             placeholder="Enter your website URL"
@@ -411,13 +410,24 @@
         }
       };
 
+      const addProtocol = (url) => {
+        if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
+            url = "https://" + url;
+        }
+
+        return url;
+      }
+
       const onSubmit = (e) => {
         const experienceUrl = document.querySelector(
           "input[name=experienceUrl]:checked"
         ).value;
-        
+        const siteUrl = document.querySelector("input[name=siteUrl]").value;
+
         document.querySelector("input[name=experienceUrl]:checked").value =
           window.location.origin + experienceUrl;
+
+        document.querySelector("input[name=siteUrl]").value = addProtocol(siteUrl);
       };
 
       input.addEventListener("input", stateHandle);
