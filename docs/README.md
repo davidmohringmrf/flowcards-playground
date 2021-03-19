@@ -14,17 +14,17 @@ The [Flowcards Playground](https://playground.marfeel.com) helps users simulate 
 
 Steps to run a simulation:
 1. Browse to https://playground.marfeel.com
-2. Introduce a URL where you want to load a Flowcard in
+2. Introduce the URL you want to load a Flowcard on
 3. Choose one of the sample pre-defined Flowcards
 4. Experience it in your smartphone or browser Dev Tools
     
 ## Considerations
-The Flowcards SDK relies on mobile touch events that are not smooth on Desktop. For an optimum user experience you must run the simulations in an smartphone.
+The Flowcards SDK relies on mobile events and therefore, don’t run smoothly on Desktop. For an optimum user experience you must run the simulations on a smartphone.
 
-The Flowcards Playground loads Flowcards in the specified URL using a reverse proxy just for the purpose of testing. There might situations where loading a site through the reverse proxy doesn't work  as expected and get CORS errors or any other random error.
+There might be situations where loading a site through the reverse proxy doesn't work as expected and you get CORS errors, or any other random error. 
  
 ## Custom simulations
-The Flowcards Playground allows simulating any `flowcards.json` you have on top of any url. To do so you have to invoke the `https://playground.mrf.io/simulate` API end point directly with the required query params:
+The Flowcards Playground allows the simulation of any `flowcards.json` you have, on top of any url. To do so you have to invoke the `https://playground.mrf.io/simulate` API end point directly with the required query params:
 
 - `siteUrl`: URL of the site you want to load a Flowcard in
 - `experienceUrl`:  URL of a valid `flowcards.json` 
@@ -38,6 +38,6 @@ Here are some example urls:
 All the configuration files of the sample flows are hosted on the [Flowcards-Playground open Github repository](https://github.com/Marfeel/flowcards-playground) to work as a reference and show the art-of-the-possible of Flowcards. 
 
 ## Codesandbox
-For easy experimentation [the Flowcards-Playground Github repository](https://github.com/Marfeel/flowcards-playground) is [connected to CodeSandbox](https://codesandbox.io/s/flowcards-playground-g3geg), which allows users to do live code changes and see the results immediately without setting up a local environment. 
+For easy experimentation [the Flowcards-Playground Github repository](https://github.com/Marfeel/flowcards-playground) is [connected to CodeSandbox](https://codesandbox.io/s/flowcards-playground-g3geg), which allows users to do live code changes and see the results immediately, without the need to set up a local environment.
 
 [![Flowcards Playground demo](./assets/demo-screenshot.png)](https://www.loom.com/share/3a85e435fe8146729502e3aa57cdba44)
