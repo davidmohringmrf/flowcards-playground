@@ -97,6 +97,11 @@ form {
   border-color: var(--secondary-color);
 }
 
+input#siteUrl:disabled,
+.card-type.disabled {
+  opacity: 0.3;
+}
+
 .card-type {
   display: flex;
   margin: auto;
