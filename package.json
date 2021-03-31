@@ -9,6 +9,9 @@
     "type": "git",
     "url": "git+https://github.com/Marfeel/flowcards-playground.git"
   },
+  "publishConfig": {
+    "registry": "https://repositories.mrf.io/nexus/repository/npm-internal/"
+  },
   "author": "Marfeel",
   "license": "ISC",
   "bugs": {
