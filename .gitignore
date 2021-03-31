@@ -2,6 +2,7 @@ target
 bin
 .idea/libraries
 .vscode/launch.test.json
+node_modules
 
 ######################
 # OS generated files #
