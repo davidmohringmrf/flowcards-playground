@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Marfeel/flowcards-playground/issues"
   },
-  "homepage": "https://github.com/Marfeel/flowcards-playground#readme"
+  "homepage": "https://github.com/Marfeel/flowcards-playground#readme",
+  "devDependencies": {
+    "chai": "^4.3.4"
+  }
 }
