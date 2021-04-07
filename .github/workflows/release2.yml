@@ -19,5 +19,5 @@ jobs:
       - name: 🚀 Publish
         uses: Marfeel/github-actions/common/actions/publish@master
         with:
-          nexus-token: ${{ secrets.NPM_NEXUS_AUTH }}
+          nexus-token: "test"
           build-number: ${{ github.run_id }}
