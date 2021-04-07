@@ -18,9 +18,9 @@ jobs:
         with:
           node-version: "12.x"
       - name: 📦 Initialize
-        uses: Marfeel/github-actions/providers/widget/initialize@master
+        uses: Marfeel/github-actions/common/actions/initialize@master
       - name: 🚀 Publish
-        uses: Marfeel/github-actions/providers/widget/publish@master
+        uses: Marfeel/github-actions/common/actions/publish@master
         with:
           gh-token: ${{ secrets.GH_PACKAGE_REGISTRY_TOKEN }}
           nexus-token: ${{ secrets.NPM_NEXUS_AUTH }}
