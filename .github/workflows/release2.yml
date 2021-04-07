@@ -16,8 +16,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "12.x"
-      - name: 📦 Initialize
-        uses: Marfeel/github-actions/common/actions/initialize@master
       - name: 🚀 Publish
         uses: Marfeel/github-actions/common/actions/publish@master
         with:
