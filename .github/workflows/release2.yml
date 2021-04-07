@@ -11,7 +11,6 @@ jobs:
   publish:
     name: Publish
     runs-on: ubuntu-latest
-    if: github.event.repository.name != 'widget-providers-template'
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -22,6 +21,5 @@ jobs:
       - name: 🚀 Publish
         uses: Marfeel/github-actions/common/actions/publish@master
         with:
-          gh-token: ${{ secrets.GH_PACKAGE_REGISTRY_TOKEN }}
           nexus-token: ${{ secrets.NPM_NEXUS_AUTH }}
           build-number: ${{ github.run_id }}
