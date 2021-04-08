@@ -36,11 +36,20 @@
     "@wdio/sync": "^7.3.1",
     "appium": "^1.20.2",
     "appium-doctor": "^1.16.0",
-    "chai": "^4.3.4"
+    "chai": "^4.3.4",
+    "semantic-release": "^17.4.2"
   },
   "dependencies": {
     "@wdio/cli": "^7.3.1",
     "browserstack-local": "^1.4.8",
     "dotenv": "^8.2.0"
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/github",
+      "@semantic-release/npm"
+    ]
   }
 }
