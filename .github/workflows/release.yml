@@ -1,0 +1,24 @@
+name: Release
+on:
+  push:
+    branches:
+      - master
+      - next
+      - beta
+      - test
+      - "*.x" # maintenance releases
+
+jobs:
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - run: npm ci
+      - name: 🚀 Publish
+        uses: Marfeel/github-actions/common/actions/publish@master
+        with:
+          gh-token: ${{ secrets.GITHUB_TOKEN }}
+          nexus-token: ${{ secrets.NPM_NEXUS_AUTH }}
+          build-number: ${{ github.run_id }}
