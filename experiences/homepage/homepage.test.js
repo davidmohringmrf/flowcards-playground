@@ -1,6 +1,7 @@
 const { bootstrapExperience } = require('../../e2e/utils/bootstrap');
 const { scrollTo } = require('../../e2e/utils/scroll');
 const { touchCard } = require('../../e2e/utils/touch');
+const { scrollCardBy } = require('../../e2e/utils/cardActions/scroll');
 const { isAtSnapPoint } = require('../../e2e/utils/snapPoints');
 const { isCardContentLoaded } = require('../../e2e/utils/cardContent');
 const { expect } = require('chai');
@@ -81,4 +82,59 @@ describe('homepage experience', function() {
 
 		expect(isAtActiveSnapPoint).equal(true);
 	});
+
+	it("close card by click when opened", async ()=>{
+		/*
+		* This test expects to run from a state with flowcard already active
+	    */
+
+		// Assure card is already in viewport
+		const firstCard = await browser.$(config.cards.homepage.cardSelector);
+		const firstCardIsInViewport = await firstCard.isDisplayedInViewport();
+		expect(firstCardIsInViewport).equal(true);
+
+		// Assure card is already active
+		const isFlowcardActiveBeforeClosing = await isAtSnapPoint(browser,
+			config.cards.homepage.cardSelector,
+			config.cards.homepage.snapPoints.active)
+
+		expect(isFlowcardActiveBeforeClosing).equal(true);
+
+		await scrollCardBy(browser, config.cards.homepage.cardSelector, 800)
+
+		// await browser.waitUntil(async (cardSelector) => {
+		// 	const flowcardElement = document.querySelector(`${cardSelector} [data-testid="sticky-close-icon"]`)
+		// 	var TouchSimulate = require('touch-simulate')
+		// 	var touch = new TouchSimulate(flowcardElement, {
+		// 		point: true
+		// 	})
+
+		// 	touch.start() // fire touchstart at center of element
+		// 		.moveRight(150, false) // move right 150px, no touchend event
+		// 		.wait(100) // wait 100ms
+		// 		.moveDown(150, false)
+		// 		.wait(100)
+		// 		.moveLeft(150, false)
+		// 		.wait(100)
+		// 		.moveUp(150) // move up 150px and fire touchend
+		// }, {
+		// 	timeout: 5000,
+		// 	interval: 500,
+		// 	timeoutMsg: `Failed my awesome method`
+		// });
+
+		// browser.touchAction('//UITextbox', [
+		// 	'press',
+		// 	{ action: 'moveTo', x: 200, y: 0},
+		// 	'release'
+		// ])
+
+		// await closeCard(browser, config.cards.homepage.cardSelector)
+
+		// isAtMinimisedSnapPoint = await isAtSnapPoint(browser,
+		// 	config.cards.homepage.cardSelector,
+		// 	config.cards.homepage.snapPoints.minimised)
+
+		// expect(isAtMinimisedSnapPoint).equal(true);
+   });
 });
