@@ -18,7 +18,8 @@ describe('homepage experience', function() {
 		experienceUrl: '/experiences/homepage/homepage.json'
 	});
 
-	it('setup', async function() {
+	// Setup
+	before(async () => {
 		config = experience;
 		fixture = {
 			url: fixtureUrl,
