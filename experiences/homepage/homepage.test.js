@@ -3,6 +3,7 @@ const { scrollTo } = require('../../e2e/utils/scroll');
 const { touchCard } = require('../../e2e/utils/touch');
 const { isAtSnapPoint } = require('../../e2e/utils/snapPoints');
 const { isCardContentLoaded } = require('../../e2e/utils/cardContent');
+const { triggerInfiniteScroll, isAttachedToEndOfPage } = require('../../e2e/utils/infiniteScroll');
 const { expect } = require('chai');
 const { getUrlFixture } = require('../../e2e/utils/fixtureUrl');
 const experience = require('./homepage.json');
@@ -45,14 +46,8 @@ describe('homepage experience', function() {
 		expect(rightContentLoaded).equal(true);
 	});
 
-	it('card should be displayed in viewport at initial snap point', async()=>{
+	it('card should be at initial snap point', async()=>{
 		await scrollTo(browser, 800);
-
-		const firstCard = await browser.$(config.cards.homepage.cardSelector);
-
-		const firstCardIsInViewport = await firstCard.isDisplayedInViewport();
-
-		expect(firstCardIsInViewport).equal(true);
 
 		const isAtInitialSnapPoint = await isAtSnapPoint(browser,
 			config.cards.homepage.cardSelector,
@@ -72,13 +67,21 @@ describe('homepage experience', function() {
 	// 	expect(isAtMinimisedSnapPoint).equal(true);
 	// });
 
-	it('activate card by click', async()=>{
-		await touchCard(browser, config.cards.homepage.cardSelector);
+	// it('activate card by click', async()=>{
+	// 	await touchCard(browser, config.cards.homepage.cardSelector);
 
-		const isAtActiveSnapPoint = await isAtSnapPoint(browser,
-			config.cards.homepage.cardSelector,
-			config.cards.homepage.snapPoints.active);
+	// 	const isAtActiveSnapPoint = await isAtSnapPoint(browser,
+	// 		config.cards.homepage.cardSelector,
+	// 		config.cards.homepage.snapPoints.active);
 
-		expect(isAtActiveSnapPoint).equal(true);
+	// 	expect(isAtActiveSnapPoint).equal(true);
+	// });
+
+	it('card attaches to end of page for infinite scroll', async()=>{
+		await triggerInfiniteScroll(browser);
+
+		const isSticky = await isAttachedToEndOfPage(browser, config.cards.homepage.cardSelector);
+
+		expect(isSticky).equal(true);
 	});
 });
