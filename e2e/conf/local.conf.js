@@ -3,7 +3,7 @@ const { buildConfiguration } = require('./configurationBuilder');
 const capabilities = [{
 	platformName: 'iOS',
 	automationName: 'XCUITest',
-	deviceName: 'iPhone 11',
+	deviceName: 'iPhone 8 Plus',
 	platformVersion: '14.4',
 	browserName: 'Safari'
 }];
