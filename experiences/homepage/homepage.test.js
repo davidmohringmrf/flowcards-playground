@@ -2,6 +2,7 @@ const { bootstrapExperience } = require('../../e2e/utils/bootstrap');
 const { scrollTo } = require('../../e2e/utils/scroll');
 const { touchCard } = require('../../e2e/utils/touch');
 const { scrollCardBy } = require('../../e2e/utils/cardActions/scroll');
+const { closeCard } = require('../../e2e/utils/cardActions/close');
 const { isAtSnapPoint } = require('../../e2e/utils/snapPoints');
 const { isCardContentLoaded } = require('../../e2e/utils/cardContent');
 const { expect } = require('chai');
@@ -9,7 +10,7 @@ const { getUrlFixture } = require('../../e2e/utils/fixtureUrl');
 const experience = require('./homepage.json');
 
 describe('homepage experience', function() {
-	let config,
+	let homepageConfig,
 		fixture;
 	const fixtureUrl = getUrlFixture({
 		siteUrl: 'https://playground.marfeel.com/templates/article-skeleton.html',
@@ -20,45 +21,45 @@ describe('homepage experience', function() {
 
 	// Setup
 	before(async () => {
-		config = experience;
+		homepageConfig = experience.cards.homepage;
 		fixture = {
 			url: fixtureUrl,
 			articleTitle: 'Article example'
 		};
 
-		await bootstrapExperience(browser, config, fixture);
+		await bootstrapExperience(browser, homepageConfig, fixture);
 	});
 
 	it('card should render on scroll', async function() {
 		await scrollTo(browser, 400);
 
-		const firstCard = await browser.$(config.cards.homepage.cardSelector);
+		const firstCard = await browser.$(homepageConfig.cardSelector);
 
 		const firstCardExists = await firstCard.waitForExist({ timeout: 5000 });
 
 		expect(firstCardExists).equal(true);
 	});
 
-	it('card should have right content', async function() {
-		const rightContentLoaded = await isCardContentLoaded(browser,
-			config.cards.homepage.cardSelector,
-			config.cards.homepage.content);
+	// it('card should have right content', async function() {
+	// 	const rightContentLoaded = await isCardContentLoaded(browser,
+	// 		config.cards.homepage.cardSelector,
+	// 		config.cards.homepage.content);
 
-		expect(rightContentLoaded).equal(true);
-	});
+	// 	expect(rightContentLoaded).equal(true);
+	// });
 
 	it('card should be displayed in viewport at initial snap point', async()=>{
 		await scrollTo(browser, 800);
 
-		const firstCard = await browser.$(config.cards.homepage.cardSelector);
+		const firstCard = await browser.$(homepageConfig.cardSelector);
 
 		const firstCardIsInViewport = await firstCard.isDisplayedInViewport();
 
 		expect(firstCardIsInViewport).equal(true);
 
 		const isAtInitialSnapPoint = await isAtSnapPoint(browser,
-			config.cards.homepage.cardSelector,
-			config.cards.homepage.snapPoints.initial);
+			homepageConfig.cardSelector,
+			homepageConfig.snapPoints.initial);
 
 		expect(isAtInitialSnapPoint).equal(true);
 	});
@@ -75,11 +76,11 @@ describe('homepage experience', function() {
 	// });
 
 	it('activate card by click', async()=>{
-		await touchCard(browser, config.cards.homepage.cardSelector);
+		await touchCard(browser, homepageConfig.cardSelector);
 
 		const isAtActiveSnapPoint = await isAtSnapPoint(browser,
-			config.cards.homepage.cardSelector,
-			config.cards.homepage.snapPoints.active);
+			homepageConfig.cardSelector,
+			homepageConfig.snapPoints.active);
 
 		expect(isAtActiveSnapPoint).equal(true);
 	});
@@ -90,52 +91,31 @@ describe('homepage experience', function() {
 	    */
 
 		// Assure card is already in viewport
-		const firstCard = await browser.$(config.cards.homepage.cardSelector);
-		const firstCardIsInViewport = await firstCard.isDisplayedInViewport();
-		expect(firstCardIsInViewport).equal(true);
+		const firstCard = await browser.$(homepageConfig.cardSelector);
+		const firstCardIsInViewportBeforeClosing = await firstCard.isDisplayedInViewport();
+		expect(firstCardIsInViewportBeforeClosing).equal(true);
 
 		// Assure card is already active
 		const isFlowcardActiveBeforeClosing = await isAtSnapPoint(browser,
-			config.cards.homepage.cardSelector,
-			config.cards.homepage.snapPoints.active)
+			homepageConfig.cardSelector,
+			homepageConfig.snapPoints.active)
 
 		expect(isFlowcardActiveBeforeClosing).equal(true);
 
-		await scrollCardBy(browser, config.cards.homepage.cardSelector, 800)
+		//Assure closeButton is invisible
+		expect(browser.$(`${homepageConfig.cardSelector} [data-testid="sticky-close-icon"]`)).not.toBeDisplayed()
 
-		// await browser.waitUntil(async (cardSelector) => {
-		// 	const flowcardElement = document.querySelector(`${cardSelector} [data-testid="sticky-close-icon"]`)
-		// 	var TouchSimulate = require('touch-simulate')
-		// 	var touch = new TouchSimulate(flowcardElement, {
-		// 		point: true
-		// 	})
+		// Scroll card until close button is visible
+		// await scrollCardBy(browser, homepageConfig.cardSelector, 800)
 
-		// 	touch.start() // fire touchstart at center of element
-		// 		.moveRight(150, false) // move right 150px, no touchend event
-		// 		.wait(100) // wait 100ms
-		// 		.moveDown(150, false)
-		// 		.wait(100)
-		// 		.moveLeft(150, false)
-		// 		.wait(100)
-		// 		.moveUp(150) // move up 150px and fire touchend
-		// }, {
-		// 	timeout: 5000,
-		// 	interval: 500,
-		// 	timeoutMsg: `Failed my awesome method`
-		// });
+		//TODO Assure closeButton is visible
+		//expect(browser.$(`${homepageConfig.cardSelector} [data-testid="sticky-close-icon"]`)).toBeDisplayed()
 
-		// browser.touchAction('//UITextbox', [
-		// 	'press',
-		// 	{ action: 'moveTo', x: 200, y: 0},
-		// 	'release'
-		// ])
+		//TODO click close button
+		// await closeCard(browser, homepageConfig.cardSelector)
 
-		// await closeCard(browser, config.cards.homepage.cardSelector)
-
-		// isAtMinimisedSnapPoint = await isAtSnapPoint(browser,
-		// 	config.cards.homepage.cardSelector,
-		// 	config.cards.homepage.snapPoints.minimised)
-
-		// expect(isAtMinimisedSnapPoint).equal(true);
+		//TODO Assure card is not in viewport
+		// const firstCardIsInViewportAfterClosing = await firstCard.isDisplayedInViewport();
+		// expect(firstCardIsInViewportAfterClosing).equal(false);
    });
 });
